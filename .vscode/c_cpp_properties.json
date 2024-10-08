@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "msvc-x64",
+            "compileCommands": "F:\\My Game Projects\\Unreal Projects\\CoOpAdventure\\.vscode\\compileCommands_Default.json"
+        }
+    ],
+    "version": 4
+}
