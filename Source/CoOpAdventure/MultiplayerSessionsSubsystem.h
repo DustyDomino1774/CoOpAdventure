@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
+#include "Interfaces/OnlineSessionInterface.h"
 #include "MultiplayerSessionsSubsystem.generated.h"
 
 /**
@@ -15,10 +16,12 @@ class COOPADVENTURE_API UMultiplayerSessionsSubsystem : public UGameInstanceSubs
 	GENERATED_BODY()
 	
 public:
+	
 	UMultiplayerSessionsSubsystem();
 
 	void Initialize(FSubsystemCollectionBase& Collection) override;
 	void Deinitialize() override;
 
+	IOnlineSessionPtr SessionInterface;
 
 };
