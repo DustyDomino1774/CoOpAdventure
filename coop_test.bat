@@ -1,0 +1,1 @@
+"E:\UE_5.4\Engine\Binaries\Win64\UnrealEditor.exe" "F:\My Game Projects\Unreal Projects\CoOpAdventure\CoOpAdventure.uproject" -game -ResX=960 -ResY=540 -log -WINDOWED
