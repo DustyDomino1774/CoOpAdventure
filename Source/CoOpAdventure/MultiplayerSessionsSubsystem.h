@@ -31,4 +31,8 @@ public:
 	void FindServer(FString ServerName);
 
 	void OnCreateSessionComplete(FName SesssionName, bool WasSuccessful);
+	void OnDestroySessionComplete(FName SesssionName, bool WasSuccessful);
+
+	bool CreateServerAfterDestroy;
+	FString DestroyServerName;
 };
