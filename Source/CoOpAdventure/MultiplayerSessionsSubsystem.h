@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "Interfaces/OnlineSessionInterface.h"
+#include "OnLineSessionSettings.h"
 #include "MultiplayerSessionsSubsystem.generated.h"
 
 /**
@@ -32,7 +33,10 @@ public:
 
 	void OnCreateSessionComplete(FName SesssionName, bool WasSuccessful);
 	void OnDestroySessionComplete(FName SesssionName, bool WasSuccessful);
+	void OnFindSessionsComplete(bool WasSuccessful);
 
 	bool CreateServerAfterDestroy;
 	FString DestroyServerName;
+
+	TSharedPtr<FOnlineSessionSearch> SessionSearch;
 };
