@@ -55,6 +55,7 @@ void UMultiplayerSessionsSubsystem::CreateServer(FString ServerName)
 	if (ServerName.IsEmpty())
 	{
 		PrintString("Server name cannot be empty!");
+		ServerCreateDel.Broadcast(false);
 		return;
 	}
 
@@ -94,6 +95,7 @@ void UMultiplayerSessionsSubsystem::FindServer(FString ServerName)
 	if (ServerName.IsEmpty())
 	{
 		PrintString("Server name cannot be empty!");
+		ServerJoinDel.Broadcast(false);
 		return;
 	}
 
@@ -117,6 +119,8 @@ void UMultiplayerSessionsSubsystem::FindServer(FString ServerName)
 void UMultiplayerSessionsSubsystem::OnCreateSessionComplete(FName SessionName, bool WasSuccessful)
 {
 	PrintString(FString::Printf(TEXT("OnCreateSessionComplete: %d"), WasSuccessful));
+
+	ServerCreateDel.Broadcast(WasSuccessful);
 
 	if (WasSuccessful)
 	{
@@ -170,16 +174,20 @@ void UMultiplayerSessionsSubsystem::OnFindSessionsComplete(bool WasSuccessful)
 		{
 			PrintString(FString::Printf(TEXT("Couldn't find server: %s"), *ServerNameToFind));
 			ServerNameToFind = "";
+			ServerJoinDel.Broadcast(false);
 		}
 	}
 	else
 	{
 		PrintString("Zero sessions found.");
+		ServerJoinDel.Broadcast(false);
 	}
 }
 
 void UMultiplayerSessionsSubsystem::OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result)
 {
+	ServerJoinDel.Broadcast(Result == EOnJoinSessionCompleteResult::Success);
+	
 	if (Result == EOnJoinSessionCompleteResult::Success)
 	{
 		PrintString(FString::Printf(TEXT("Successfully joined session: %s"), *SessionName.ToString()));

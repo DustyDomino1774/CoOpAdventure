@@ -1,0 +1,13 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "f:\\my game projects\\unreal projects\\coopadventure\\plugins\\advancedsessions\\advancedsteamsessions\\intermediate\\build\\win64\\unrealeditor\\inc\\advancedsteamsessions\\uht\\advancedsteamsessions.init.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\my game projects\\unreal projects\\coopadventure\\intermediate\\build\\win64\\x64\\coopadventureeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.inclorderunreal5_4.h.pch",
+        "Includes": [
+            "f:\\my game projects\\unreal projects\\coopadventure\\plugins\\advancedsessions\\advancedsteamsessions\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\advancedsteamsessions\\definitions.advancedsteamsessions.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
