@@ -27,7 +27,7 @@ public:
 	USceneComponent* RootComp;
 	
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* TriggerShape;
+	UStaticMeshComponent* TriggerMesh;
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	UStaticMeshComponent* Mesh;
