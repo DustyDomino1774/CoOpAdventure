@@ -38,7 +38,7 @@ APressurePlate::APressurePlate()
 	auto MeshAsset = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("/Game/Stylized_Egypt/Meshes/building/SM_building_part_08.SM_building_part_08"));
 	if (MeshAsset.Succeeded())
 	{
-		Mesh->SetStaticMesh(TriggerMeshAsset.Object);
+		Mesh->SetStaticMesh(MeshAsset.Object);
 		Mesh->SetRelativeScale3D(FVector(4.0f, 4.0f, 0.5f));
 		Mesh->SetRelativeLocation(FVector(0.0f, 0.0f, 7.2f));
 	}
