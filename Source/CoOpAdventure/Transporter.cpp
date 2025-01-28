@@ -4,24 +4,42 @@
 #include "Transporter.h"
 
 // Sets default values
-ATransporter::ATransporter()
+UTransporter::UTransporter()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = true;
+
+	SetIsReplicatedByDefault(true);
+
+	MoveTime = 3.0f;
+	ActivatedTriggerCount = 0;
+	ArePointsSet = false;
+	StartPoint, EndPoint = FVector::Zero();
+	
 
 }
 
+void UTransporter::SetPoints(FVector Point1, FVector Point2)
+{
+	if (Point1.Equals(Point2)) return;
+	
+	StartPoint = Point1;
+	EndPoint = Point2;
+	ArePointsSet = true;
+}
+
 // Called when the game starts or when spawned
-void ATransporter::BeginPlay()
+void UTransporter::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void ATransporter::Tick(float DeltaTime)
+void UTransporter::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
-	Super::Tick(DeltaTime);
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 }
+
 

@@ -3,17 +3,17 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "Components/ActorComponent.h"
 #include "Transporter.generated.h"
 
-UCLASS()
-class COOPADVENTURE_API ATransporter : public AActor
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+class COOPADVENTURE_API UTransporter : public UActorComponent
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ATransporter();
+	UTransporter();
 
 protected:
 	// Called when the game starts or when spawned
@@ -21,7 +21,7 @@ protected:
 
 public:	
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	FVector StartPoint, EndPoint;
 
@@ -38,4 +38,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	bool AllTriggerActorsTriggered;
+
+	UFUNCTION()
+	void  SetPoints(FVector Point1, FVector Point2);
 };
