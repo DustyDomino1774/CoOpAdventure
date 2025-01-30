@@ -2,6 +2,7 @@
 
 
 #include "Transporter.h"
+#include "PressurePlate.h"
 
 // Sets default values
 UTransporter::UTransporter()
@@ -33,6 +34,31 @@ void UTransporter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	for (AActor* TA : TriggerActors)
+	{
+		APressurePlate *PressurePlateActor = Cast<APressurePlate>(TA);
+		if (PressurePlateActor)
+		{
+			PressurePlateActor->OnActivated.AddDynamic(this, &UTransporter::OnPressurePlateActivated);
+			PressurePlateActor->OnDeactivated.AddDynamic(this, &UTransporter::UTransporter::OnPressurePlateDeactivated);
+		}
+	}
+}
+
+void UTransporter::OnPressurePlateActivated()
+{
+	ActivatedTriggerCount++;
+
+	FString Msg = FString::Printf(TEXT("Transporter Activated: %d"), ActivatedTriggerCount);
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::White, Msg);
+}
+
+void UTransporter::OnPressurePlateDeactivated()
+{
+	ActivatedTriggerCount--;
+	
+	FString Msg = FString::Printf(TEXT("Transporter Activated: %d"), ActivatedTriggerCount);
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::White, Msg);
 }
 
 // Called every frame
@@ -40,6 +66,12 @@ void UTransporter::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	if (TriggerActors.Num() > 0)
+	{
+		AllTriggerActorsTriggered = (ActivatedTriggerCount >= TriggerActors.Num());
+		if (AllTriggerActorsTriggered)
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::White, FString::Printf(TEXT("Triggers Triggered!")));
+	}
 }
 
 

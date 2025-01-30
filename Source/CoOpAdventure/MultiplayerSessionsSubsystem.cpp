@@ -83,7 +83,7 @@ void UMultiplayerSessionsSubsystem::CreateServer(FString ServerName)
 	//If subsystem is NULL make session LAN only otherwise false
 	SessionSettings.bIsLANMatch = (IOnlineSubsystem::Get()->GetSubsystemName() == "NULL") ? true : false;
 
-	SessionSettings.Set(FName("SERVER_nAME"), ServerName, EOnlineDataAdvertisementType::ViaOnlineServiceAndPing);
+	SessionSettings.Set(FName("SERVER_NAME"), ServerName, EOnlineDataAdvertisementType::ViaOnlineServiceAndPing);
 	
 	SessionInterface->CreateSession(0, MySessionName, SessionSettings);
 }

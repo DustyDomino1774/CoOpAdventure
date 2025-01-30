@@ -28,6 +28,14 @@
 		{
 			"Name": "OnlineServicesOSSAdapter",
 			"Enabled": true
+		},
+		{
+			"Name": "AdvancedSteamSessions",
+			"Enabled": false
+		},
+		{
+			"Name": "AdvancedSessions",
+			"Enabled": false
 		}
 	]
 }
