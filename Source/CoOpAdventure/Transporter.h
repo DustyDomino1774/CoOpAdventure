@@ -31,6 +31,9 @@ public:
 	float MoveTime;
 
 	UPROPERTY(EditAnywhere)
+	bool OwnerIsTriggerActor;
+
+	UPROPERTY(EditAnywhere)
 	TArray<AActor*> TriggerActors;
 
 	UPROPERTY(VisibleAnywhere)

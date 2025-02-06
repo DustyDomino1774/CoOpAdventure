@@ -28,7 +28,6 @@ AMoveableActor::AMoveableActor()
 	Mesh->SetIsReplicated(true);
 
 	Transporter = CreateDefaultSubobject<UTransporter>(TEXT("Transporter"));
-
 }
 
 // Called when the game starts or when spawned

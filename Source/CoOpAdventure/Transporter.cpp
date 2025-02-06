@@ -33,6 +33,11 @@ void UTransporter::SetPoints(FVector Point1, FVector Point2)
 void UTransporter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (OwnerIsTriggerActor)
+	{
+		TriggerActors.Add(GetOwner());
+	}
 	
 	for (AActor* TA : TriggerActors)
 	{
@@ -71,7 +76,7 @@ void UTransporter::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 		AllTriggerActorsTriggered = (ActivatedTriggerCount >= TriggerActors.Num());
 		if (AllTriggerActorsTriggered)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::White, FString::Printf(TEXT("Triggers Triggered!")));
+			// GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::White, FString::Printf(TEXT("Triggers Triggered!")));
 		}
 	}
 
