@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Components/StaticMeshComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "CollectableKey.generated.h"
 
@@ -37,8 +36,8 @@ public:
 	USceneComponent* RootComp;
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* Mesh;
+	UCapsuleComponent* Capsule;
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UCapsuleComponent* Capsule;
+	UStaticMeshComponent* Mesh;
 };
