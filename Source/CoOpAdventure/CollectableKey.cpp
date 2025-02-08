@@ -20,6 +20,7 @@ ACollectableKey::ACollectableKey()
 	Capsule->SetupAttachment(RootComp);
 	Capsule->SetIsReplicated(true);
 	Capsule->SetCollisionProfileName(FName("OverlapAllDynamic"));
+	Capsule->SetRelativeLocation(FVector::Zero());
 	Capsule->SetCapsuleHalfHeight(150.0f);
 	Capsule->SetCapsuleRadius(100.0f);
 
@@ -27,6 +28,17 @@ ACollectableKey::ACollectableKey()
 	Mesh->SetupAttachment(RootComp);
 	Mesh->SetIsReplicated(true);
 	Mesh->SetCollisionProfileName(FName("OverlapAllDynamic"));
+	Mesh->SetRelativeLocation(FVector::Zero());
+
+	CollectAudio = CreateDefaultSubobject<UAudioComponent>(TEXT("CollectAudio"));
+	CollectAudio->SetupAttachment(RootComp);
+	CollectAudio->SetAutoActivate(false);
+	CollectAudio->SetRelativeLocation(FVector::Zero());
+
+	_relativeStartingLocationZ = Capsule->GetRelativeLocation().Z;
+	RotationSpeed = 100.0f;
+	FloatSpeed = 3.0f;
+	FloatHeight = 50.0f;
 }
 
 // Called when the game starts or when spawned
@@ -43,6 +55,12 @@ void ACollectableKey::Tick(float DeltaTime)
 
 	if (HasAuthority())
 	{
+		//Rotate the static mesh
+		Mesh->AddRelativeRotation(FRotator(0.0f, RotationSpeed*DeltaTime, 0.0f));
+		
+		Mesh->SetRelativeLocation(FVector(0.0f, 0.0f,
+			(FMath::Sin(GetGameTimeSinceCreation() * FloatSpeed) * FloatHeight + _relativeStartingLocationZ)));
+		
 		TArray<AActor*> OverlappingActors;
 		Capsule->GetOverlappingActors(OverlappingActors, ACoOpAdventureCharacter::StaticClass());
 
@@ -74,6 +92,7 @@ void ACollectableKey::OnRep_IsCollected()
 	}
 
 	Mesh->SetVisibility(!IsCollected);
+	CollectAudio->Play();
 }
 
 
