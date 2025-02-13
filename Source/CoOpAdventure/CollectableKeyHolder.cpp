@@ -19,12 +19,12 @@ ACollectableKeyHolder::ACollectableKeyHolder()
 	KeyMesh->SetupAttachment(RootComp);
 	KeyMesh->SetIsReplicated(true);
 	KeyMesh->SetCollisionProfileName(FName("OverlapAllDynamic"));
-	KeyMesh->SetRelativeLocation(FVector::Zero());
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	Mesh->SetupAttachment(RootComp);
 	Mesh->SetIsReplicated(true);
 	Mesh->SetCollisionProfileName(FName("BlockAllDynamic"));
+	Mesh->SetRelativeLocation(FVector::Zero());
 
 	KeyMeshRotationSpeed = 100.0f;
 
@@ -45,7 +45,7 @@ void ACollectableKeyHolder::Tick(float DeltaTime)
 
 	if (HasAuthority() && KeyMesh->IsVisible())
 	{
-		Mesh->AddRelativeRotation(FRotator(0.0f, KeyMeshRotationSpeed*DeltaTime, 0.0f));
+		KeyMesh->AddRelativeRotation(FRotator(0.0f, KeyMeshRotationSpeed*DeltaTime, 0.0f));
 	}
 
 }

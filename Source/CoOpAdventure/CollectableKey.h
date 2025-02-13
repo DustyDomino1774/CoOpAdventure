@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/AudioComponent.h"
+#include "CollectableKeyHolder.h"
 #include "CollectableKey.generated.h"
 
 UCLASS()
@@ -38,6 +39,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float FloatHeight;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	ACollectableKeyHolder* KeyHolderRef;
 	
 	UPROPERTY(ReplicatedUsing = OnRep_IsCollected, BlueprintReadWrite, VisibleAnywhere)
 	bool IsCollected;
