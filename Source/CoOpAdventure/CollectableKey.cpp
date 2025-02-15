@@ -85,6 +85,11 @@ void ACollectableKey::OnRep_IsCollected()
 	if (HasAuthority())
 	{
 		UE_LOG(LogTemp, Display, TEXT("OnRep_IsCollected called from Server!"));
+		
+		if (IsCollected)
+		{
+			OnCollected.Broadcast();
+		}
 	}
 	else
 	{
@@ -97,6 +102,7 @@ void ACollectableKey::OnRep_IsCollected()
 	if (IsCollected && KeyHolderRef)
 	{
 		KeyHolderRef->ActivateKeyMesh();
+		UE_LOG(LogTemp, Display, TEXT("Keyholder key mesh turn on."));
 	}
 }
 
